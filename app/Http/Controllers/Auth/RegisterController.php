@@ -64,10 +64,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        function unique_code($limit){
+            return substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit);
+        }
+        $unique_value = unique_code(12);
+
+        $folder_name = $unique_value .'/'.$data['email'];
+
+        \Storage::disk('local')->makeDirectory('public/'.$folder_name,0775,true);
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'initial_storage_path' => $folder_name,
         ]);
+
+
+        return $user;
     }
 }

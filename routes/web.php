@@ -19,4 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.home');
+Route::get('/recents', [App\Http\Controllers\HomeController::class, 'recents'])->name('dashboard.recents');
+Route::get('/trash', [App\Http\Controllers\HomeController::class, 'trash'])->name('dashboard.trash');
