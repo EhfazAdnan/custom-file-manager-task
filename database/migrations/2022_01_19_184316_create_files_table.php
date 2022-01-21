@@ -15,13 +15,15 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->int('userid');
-            $table->int('parent_id');
+            $table->integer('userid');
+            $table->integer('parent_id');
             $table->string('name');
+            $table->string('url');
             $table->string('type');
             $table->string('visibility');
-            $table->int('level');
+            $table->integer('level');
             $table->string('soft_delete');
+            $table->integer('serial');
             $table->timestamps();
         });
     }

@@ -22,3 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.home');
 Route::get('/recents', [App\Http\Controllers\HomeController::class, 'recents'])->name('dashboard.recents');
 Route::get('/trash', [App\Http\Controllers\HomeController::class, 'trash'])->name('dashboard.trash');
+
+Route::post('create-folder/{parent_id}/{serial}', [App\Http\Controllers\FilesController::class,'store'])->name('folder.create');
+
+Route::get('folder/{id}',[App\Http\Controllers\FilesController::class,'index'])->name('folder-details');

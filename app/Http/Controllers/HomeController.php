@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,12 @@ class HomeController extends Controller
         // Get the currently authenticated user's ID...
         $user_id = Auth::id();
 
-        return view('dashboard.home',compact('user_id'));
+        // Get file/folder values
+        $fileFolders = File::where('userid',$user_id)->where('level',1)->get();
+
+        $findRoot = File::where('userid',$user_id)->where('parent_id',0)->first();
+
+        return view('dashboard.home',compact('user_id','fileFolders','findRoot'));
     }
 
     public function recents()

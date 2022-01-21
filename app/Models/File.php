@@ -18,9 +18,11 @@ class File extends Model
         'userid',
         'parent_id',
         'name',
+        'url',
         'type',
         'visibility',
         'level',
         'soft_delete',
+        'serial',
     ];
 }

@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <div class="col-md-8">
-        <h3>My Files / Folders</h3>   
+    <div class="col-md-9">
+        <h3>My Files / Folders / {{$folderName->name}}</h3>   
         
         @if(session('status'))
            <div class="alert alert-success">{{session('status')}}</div>
@@ -24,17 +24,10 @@
 
     </div>
 
-
-    <div class="col-md-2">
+    <div class="col-md-1">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             + New
         </button>
-
-        <form action="" method="post" enctype="multipart/form-data" class="mt-5">
-            @csrf
-            <input type="file" name="upload_file" multiple>
-            <button class="btn btn-sm btn-primary" type="submit">Upload</button>
-         </form>
     </div>
 
       <!-- Modal -->
@@ -42,7 +35,7 @@
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Create New Folder User ID ({{$user_id}}) - Level ({{$findRoot->level}})  - id ({{$findRoot->id}})</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Create New Folder User ID ({{$user_id}}) - Level ({{$findRoot->level}}) - id ({{$findRoot->id}})</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 

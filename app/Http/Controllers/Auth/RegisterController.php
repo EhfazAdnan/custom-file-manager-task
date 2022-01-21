@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\File;
 
 class RegisterController extends Controller
 {
@@ -81,6 +82,15 @@ class RegisterController extends Controller
             'initial_storage_path' => $folder_name,
         ]);
 
+        $file = File::create([
+           'userid' => $user->id,
+           'parent_id' => '',
+           'name' => $user->email,
+           'type' => 'folder',
+           'visibility' => 0,
+           'level' => 0,
+           'soft_delete' => 0,
+        ]);
 
         return $user;
     }
