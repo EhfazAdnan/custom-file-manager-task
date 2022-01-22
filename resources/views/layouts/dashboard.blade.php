@@ -81,7 +81,7 @@
             
                     <div class="col-md-2">
                         <div class="card">
-                        <nav class="nav flex-column nav-pills">
+                           <nav class="nav flex-column nav-pills">
                             <a class="nav-link" href="{{route('dashboard.home')}}">My Drive</a>
                             <a class="nav-link" href="{{route('dashboard.recents')}}">Recent</a>
                             <a class="nav-link" href="{{route('dashboard.trash')}}">Trash</a>

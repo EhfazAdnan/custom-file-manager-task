@@ -73,7 +73,6 @@ class FilesController extends Controller
 
         $max_serial = File::max('serial');
         $max_serial = $max_serial + 1;
-  
         
         $file->userid = $user_id;
         $file->parent_id = $fetch_id;
@@ -89,6 +88,42 @@ class FilesController extends Controller
 
         $file->save();
         return redirect()->back()->with('status','Folder Created Successfully !!');
+    }
+
+
+    // ------------------------------------------------------
+    public function storeFiles(Request $request, $id){
+
+        $user_id = Auth::id();
+
+        $find_parent_record = File::where('id',$id)->first();
+        if($find_parent_record){
+            $fetch_folder_name = $find_parent_record->name;
+            $fetch_folder_url = $find_parent_record->url;
+        }
+
+        $root_path = $fetch_folder_url.'/'.$fetch_folder_name;
+
+       if($request->hasFile('file')){
+           foreach($request->file as $file){
+               $filename = $file->getClientOriginalName();
+               $file->storeAs('public/'.$root_path,$filename);
+
+               $fileModel = new File;
+               $fileModel->userid = $user_id;
+               $fileModel->parent_id = $id;
+               $fileModel->name = $filename;
+               $fileModel->url  = $root_path;
+               $fileModel->type = 'files';
+               $fileModel->visibility = 0;
+               $fileModel->level = 0;
+               $fileModel->soft_delete = 0;
+               $fileModel->serial = 0;
+
+               $fileModel->save();
+           }
+           return redirect()->back()->with('status','Folder Created Successfully !!');
+       }
     }
 
     /**

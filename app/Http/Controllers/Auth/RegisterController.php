@@ -86,6 +86,7 @@ class RegisterController extends Controller
            'userid' => $user->id,
            'parent_id' => '',
            'name' => $user->email,
+           'url' => $unique_value.'/',
            'type' => 'folder',
            'visibility' => 0,
            'level' => 0,
