@@ -26,6 +26,8 @@
           @endforeach    
         </div>
 
+        <div class="text-center">{{$fileFolders->links()}}</div>
+
     </div>
 
 

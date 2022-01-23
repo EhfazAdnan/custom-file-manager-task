@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'initial_storage_path',
+        'is_admin',
     ];
 
     /**

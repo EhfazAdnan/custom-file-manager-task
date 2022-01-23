@@ -32,7 +32,7 @@ class HomeController extends Controller
         $user_id = Auth::id();
 
         // Get file/folder values
-        $fileFolders = File::where('userid',$user_id)->where('level',1)->get();
+        $fileFolders = File::where('userid',$user_id)->where('level',1)->paginate(6);
 
         $findRoot = File::where('userid',$user_id)->where('parent_id',0)->first();
 
@@ -47,5 +47,10 @@ class HomeController extends Controller
     public function trash()
     {
         return view('dashboard.trash');
+    }
+
+    // admin function
+    public function adminIndex(){
+        return view('admin.adminhome');
     }
 }

@@ -28,3 +28,7 @@ Route::post('create-folder/{parent_id}/{serial}', [App\Http\Controllers\FilesCon
 Route::post('upload-files/{id}', [App\Http\Controllers\FilesController::class,'storeFiles'])->name('files.create');
 
 Route::get('folder/{id}',[App\Http\Controllers\FilesController::class,'index'])->name('folder-details');
+
+
+// admin routes
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home')->middleware('is_admin');
