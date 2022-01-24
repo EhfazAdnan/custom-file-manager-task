@@ -31,12 +31,15 @@ class HomeController extends Controller
         // Get the currently authenticated user's ID...
         $user_id = Auth::id();
 
-        // Get file/folder values
+        // Get folder values
         $fileFolders = File::where('userid',$user_id)->where('level',1)->paginate(6);
+
+        // get files
+        $files = File::where('userid',$user_id)->where('parent_id',$user_id)->where('type','files')->paginate(6);
 
         $findRoot = File::where('userid',$user_id)->where('parent_id',0)->first();
 
-        return view('dashboard.home',compact('user_id','fileFolders','findRoot'));
+        return view('dashboard.home',compact('user_id','fileFolders','findRoot','files'));
     }
 
     public function recents()

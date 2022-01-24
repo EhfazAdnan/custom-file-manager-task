@@ -25,10 +25,13 @@ class FilesController extends Controller
 
             $findRoot = File::where('userid',$user_id)->where('parent_id',$parent_id)->where('id',$id)->first();
 
-            // Get file/folder values
-            $fileFolders = File::where('userid',$user_id)->where('parent_id',$id)->get();
+            // Get folder values
+            $fileFolders = File::where('userid',$user_id)->where('parent_id',$id)->where('type','folder')->paginate(6);
+
+            // get files
+            $files = File::where('userid',$user_id)->where('parent_id',$id)->where('type','files')->paginate(6);
         
-            return view('dashboard.folder-details',compact('user_id','folderName','findRoot','fileFolders'));
+            return view('dashboard.folder-details',compact('user_id','folderName','findRoot','fileFolders','files'));
     }
 
     /**

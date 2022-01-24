@@ -3,13 +3,13 @@
 @section('content')
 
     <div class="col-md-8">
-        <h3>My Files</h3>   
+        <h3>My Folder</h3>   
         
         @if(session('status'))
            <div class="alert alert-success">{{session('status')}}</div>
         @endif
 
-        <div class="row mt-3">
+        <div class="row mt-3 mb-5">
             @foreach ($fileFolders as $fileFolder)
                 <div class="card mb-2" style="width: 18rem;">
 
@@ -24,9 +24,37 @@
                     </div>
                 </div>
           @endforeach    
+          <div class="text-center">{{$fileFolders->links()}}</div>
         </div>
 
-        <div class="text-center">{{$fileFolders->links()}}</div>
+
+
+        <div class="row mt-3">
+            <h3>My Files</h3>
+            @foreach ($files as $file)
+
+            @if (strpos($file, 'pdf') !== false)
+            <div class="col-md-4">
+                <div class="card mb-2">
+                   <embed src="{{ asset('storage/'.$file->url.'/'.$file->name) }}" />
+                    <div class="card-body">
+                      <h5>{{\Illuminate\Support\Str::limit($file->name,20)}}</h5>
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="col-md-4">
+                <div class="card mb-2">
+                    <img src="{{ asset('storage/'.$file->url.'/'.$file->name) }}" class="img-thumbnail" alt="{{$file->name}}">
+                    <div class="card-body">
+                      <h5>{{\Illuminate\Support\Str::limit($file->name,20)}}</h5>
+                    </div>
+                </div>
+            </div>
+            @endif
+            
+            @endforeach    
+        </div>
 
     </div>
 
