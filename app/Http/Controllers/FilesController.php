@@ -52,6 +52,10 @@ class FilesController extends Controller
      */
     public function store(Request $request, $parent_id, $serial)
     {
+        $this->validate($request,[
+            'name' => 'required',
+        ]);
+
         $file = new File;
         $user_id = Auth::id();
         $user_information = User::where('id',$user_id)->first();
@@ -97,6 +101,11 @@ class FilesController extends Controller
     // ------------------------------------------------------
     public function storeFiles(Request $request, $id){
 
+        request()->validate([
+            'file' => 'required',
+            'file.*' => 'mimes:doc,pdf,docx,txt,jpeg,jpg,png'
+        ]);
+
         $user_id = Auth::id();
 
         $find_parent_record = File::where('id',$id)->first();
@@ -125,7 +134,7 @@ class FilesController extends Controller
 
                $fileModel->save();
            }
-           return redirect()->back()->with('status','Folder Created Successfully !!');
+           return redirect()->back()->with('status','Files Created Successfully !!');
        }
     }
 

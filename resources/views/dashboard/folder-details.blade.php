@@ -9,6 +9,16 @@
            <div class="alert alert-success">{{session('status')}}</div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="row mt-3 mb-5">
             @foreach ($fileFolders as $fileFolder)
                 <div class="card mb-2" style="width: 18rem;">
