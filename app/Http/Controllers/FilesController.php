@@ -160,7 +160,17 @@ class FilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'folder_name_edit' => 'required',
+        ]);
+
+        $folder = File::find($id);
+
+        $folder->name = $request->folder_name_edit;
+
+        $folder->save();
+        return redirect()->back()->with('status','Folder Updated Successfully !!');
+
     }
 
     /**
@@ -171,6 +181,10 @@ class FilesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $folder = File::find($id);
+        $folder->soft_delete = 1;
+
+        $folder->save();
+        return redirect()->back()->with('status','Folder Removed Successfully !!');
     }
 }

@@ -32,3 +32,9 @@ Route::get('folder/{id}',[App\Http\Controllers\FilesController::class,'index'])-
 
 // admin routes
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home')->middleware('is_admin');
+
+
+// update folder name
+Route::post('update-folder/{id}', [App\Http\Controllers\FilesController::class,'update'])->name('folder.update');
+
+Route::delete('delete-folder/{id}', [App\Http\Controllers\FilesController::class,'destroy'])->name('folder.delete');

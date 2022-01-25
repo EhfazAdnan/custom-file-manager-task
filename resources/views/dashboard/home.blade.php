@@ -13,6 +13,51 @@
             @foreach ($fileFolders as $fileFolder)
                 <div class="card mb-2" style="width: 18rem;">
 
+                    <div class="row">
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#editDeleteModal{{$fileFolder->id}}">
+                                .....
+                            </button>
+                        </div>
+
+                        <div class="col-md-1 offset-md-9">
+                            <form onsubmit="return confirm('Do you really want delete?');" action="{{route('folder.delete',['id'=>$fileFolder->id])}}" method="POST">
+                                {{ method_field('delete') }}
+                                @csrf
+                                <button type="submit" class="btn btn-default">x</button>
+                            </form>
+                        </div>
+
+                        <!-- Modal edit delete -->
+                        <div class="modal fade" id="editDeleteModal{{$fileFolder->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editDeleteModal{{$fileFolder->id}}Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="editDeleteModal{{$fileFolder->id}}Label">Edit Folder Name</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <form action="{{route('folder.update',['id'=>$fileFolder->id])}}" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="Edit folder" name="folder_name_edit" value="{{$fileFolder->name}}">
+                                        <label for="floatingInput">Edit folder name ..</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                                </form>
+
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+
                     <a style="text-decoration: none;" href="{{route('folder-details',['id'=>$fileFolder->id])}}">
                     <svg class="mt-2" xmlns="http://www.w3.org/2000/svg" width="260" height="100" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
                         <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
@@ -77,7 +122,7 @@
 
     </div>
 
-      <!-- Modal -->
+        <!-- Modal add folder -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
@@ -103,5 +148,6 @@
             </div>
             </div>
         </div>
+
 
 @endsection

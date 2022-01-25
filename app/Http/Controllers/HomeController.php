@@ -32,7 +32,7 @@ class HomeController extends Controller
         $user_id = Auth::id();
 
         // Get folder values
-        $fileFolders = File::where('userid',$user_id)->where('level',1)->paginate(6);
+        $fileFolders = File::where('userid',$user_id)->where('level',1)->where('soft_delete', 0)->paginate(6);
 
         // get files
         $files = File::where('userid',$user_id)->where('parent_id',$user_id)->where('type','files')->paginate(6);
