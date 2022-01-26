@@ -64,7 +64,7 @@ class HomeController extends Controller
 
     public function trash()
     {
-                // Get the currently authenticated user...
+        // Get the currently authenticated user...
         $user = Auth::user();
 
         // Get the currently authenticated user's ID...
@@ -79,8 +79,5 @@ class HomeController extends Controller
         return view('dashboard.trash', compact('user_id','fileFolders','files'));
     }
 
-    // admin function
-    public function adminIndex(){
-        return view('admin.adminhome');
-    }
+
 }

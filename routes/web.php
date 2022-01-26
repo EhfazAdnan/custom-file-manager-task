@@ -29,10 +29,6 @@ Route::post('upload-files/{id}', [App\Http\Controllers\FilesController::class,'s
 
 Route::get('folder/{id}',[App\Http\Controllers\FilesController::class,'index'])->name('folder-details');
 
-
-// admin routes
-Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home')->middleware('is_admin');
-
 // update folder name
 Route::post('update-folder/{id}', [App\Http\Controllers\FilesController::class,'update'])->name('folder.update');
 
@@ -47,3 +43,9 @@ Route::get('/download/{id}', [App\Http\Controllers\FilesController::class, 'down
 
 // search
 Route::get('/search-web', [App\Http\Controllers\FilesController::class, 'search'])->name('web.search');
+
+
+// admin routes
+Route::get('/admin/home', [App\Http\Controllers\SuperAdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
+
+Route::post('/admin/update-user/{id}', [App\Http\Controllers\SuperAdminController::class, 'update'])->name('user.update')->middleware('is_admin');

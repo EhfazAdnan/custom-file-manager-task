@@ -101,12 +101,15 @@ class FilesController extends Controller
     // ------------------------------------------------------
     public function storeFiles(Request $request, $id){
 
+        $user_id = Auth::id();
+        $user = User::Find($user_id);
+
+        $file_ext = $user->file_extensions;
+
         request()->validate([
             'file' => 'required',
-            'file.*' => 'mimes:doc,pdf,docx,txt,jpeg,jpg,png'
+            'file.*' => "required|mimes:$file_ext"
         ]);
-
-        $user_id = Auth::id();
 
         $find_parent_record = File::where('id',$id)->first();
         if($find_parent_record){
@@ -176,6 +179,7 @@ class FilesController extends Controller
         $folder = File::find($id);
 
         $folder->name = $request->folder_name_edit;
+        $folder->visibility = $request->visibity;
 
         $folder->save();
         return redirect()->back()->with('status','Folder Updated Successfully !!');
