@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="screenShots/index.PNG" width="1000"></a></p>
 
 
 
@@ -28,10 +28,14 @@ Files Hub is a web application creating using popular framework Laravel. Some ke
 - Git Clone
 - NPM Install and NPM Run Dev
 - PHP artisan migrate
+- Php artisan storage:link
 - PHP artisan serve
 
 
 
 ## Some ScreenShots
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+
+<p align="center"><a href="#" target="_blank"><img src="screenShots/folder_create.PNG" width="600"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="screenShots/multiple_file_upload.PNG" width="600"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="screenShots/super_admin.PNG" width="600"></a></p>
