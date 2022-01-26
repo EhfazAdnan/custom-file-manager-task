@@ -3,7 +3,32 @@
 @section('content')
 
     <div class="col-md-8">
-        <h3>My Folder</h3>   
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>My Folders</h3>   
+            </div>
+
+            <div class="col-md-6">
+                <form action="{{ route('web.search') }}" method="GET">
+                    <div class="row">
+
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search here">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"> Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
         
         @if(session('status'))
            <div class="alert alert-success">{{session('status')}}</div>
@@ -26,7 +51,7 @@
                     <div class="row">
                         <div class="col-md-1">
                             <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#editDeleteModal{{$fileFolder->id}}">
-                                .....
+                                <p style="font-weight: bold;">&bull;&bull;&bull;&bull;</p>
                             </button>
                         </div>
 
@@ -34,7 +59,7 @@
                             <form onsubmit="return confirm('Do you really want delete?');" action="{{route('folder.delete',['id'=>$fileFolder->id])}}" method="POST">
                                 {{ method_field('delete') }}
                                 @csrf
-                                <button type="submit" class="btn btn-default">x</button>
+                                <button type="submit" class="btn btn-default"><p style="font-weight: bold;color:red;">X<p></button>
                             </form>
                         </div>
 
@@ -89,20 +114,58 @@
             @foreach ($files as $file)
 
             @if (strpos($file, 'pdf') !== false)
-            <div class="col-md-4">
+            <div class="col-md-3">
+
                 <div class="card mb-2">
+
+                    <div class="row">
+
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-default">
+                                <p style="font-weight: bold;color:green;"><a href="{{route('download')}}">&#8595;</a></p>
+                            </button>
+                        </div>
+
+                        <div class="col-md-1 offset-md-9">
+                            <form onsubmit="return confirm('Do you really want delete?');" action="{{route('file.delete',['id'=>$file->id])}}" method="POST">
+                                {{ method_field('delete') }}
+                                @csrf
+                                <button type="submit" class="btn btn-default"><p style="font-weight: bold;color:red;">X<p></button>
+                            </form>
+                        </div>
+
+                    </div>
+
                    <embed src="{{ asset('storage/'.$file->url.'/'.$file->name) }}" />
                     <div class="card-body">
-                      <h5>{{\Illuminate\Support\Str::limit($file->name,20)}}</h5>
+                      <h5>{{\Illuminate\Support\Str::limit($file->name,15)}}</h5>
                     </div>
                 </div>
             </div>
             @else
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card mb-2">
+
+                    <div class="row">
+
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-default">
+                                <p style="font-weight: bold;color:green;"><a href="{{route('download',['id'=>$file->id])}}">&#8595;</a></p>
+                            </button>
+                        </div>
+
+                        <div class="col-md-1 offset-md-7">
+                            <form onsubmit="return confirm('Do you really want delete?');" action="{{route('file.delete',['id'=>$file->id])}}" method="POST">
+                                {{ method_field('delete') }}
+                                @csrf
+                                <button type="submit" class="btn btn-default"><p style="font-weight: bold;color:red;">X<p></button>
+                            </form>
+                        </div>
+                    </div>
+
                     <img src="{{ asset('storage/'.$file->url.'/'.$file->name) }}" class="img-thumbnail" alt="{{$file->name}}">
                     <div class="card-body">
-                      <h5>{{\Illuminate\Support\Str::limit($file->name,20)}}</h5>
+                      <h5>{{\Illuminate\Support\Str::limit($file->name,15)}}</h5>
                     </div>
                 </div>
             </div>

@@ -25,4 +25,8 @@ class File extends Model
         'soft_delete',
         'serial',
     ];
+
+    public function children(){
+        return $this->hasMany(File::class, 'parent_id');
+    }
 }

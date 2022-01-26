@@ -33,8 +33,17 @@ Route::get('folder/{id}',[App\Http\Controllers\FilesController::class,'index'])-
 // admin routes
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home')->middleware('is_admin');
 
-
 // update folder name
 Route::post('update-folder/{id}', [App\Http\Controllers\FilesController::class,'update'])->name('folder.update');
 
+// soft-delete folder
 Route::delete('delete-folder/{id}', [App\Http\Controllers\FilesController::class,'destroy'])->name('folder.delete');
+
+// soft-delete files
+Route::delete('delete-file/{id}', [App\Http\Controllers\FilesController::class,'destroyFiles'])->name('file.delete');
+
+// download
+Route::get('/download/{id}', [App\Http\Controllers\FilesController::class, 'download_public'])->name('download');
+
+// search
+Route::get('/search-web', [App\Http\Controllers\FilesController::class, 'search'])->name('web.search');

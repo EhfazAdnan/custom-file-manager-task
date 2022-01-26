@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    File Manager
+                    Files Hub
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -82,11 +82,15 @@
                     <div class="col-md-2">
                         <div class="card">
                            <nav class="nav flex-column nav-pills">
-                            <a class="nav-link" href="{{route('dashboard.home')}}">My Drive</a>
-                            <a class="nav-link" href="{{route('dashboard.recents')}}">Recent</a>
-                            <a class="nav-link" href="{{route('dashboard.trash')}}">Trash</a>
+
+                            <a href="{{route('dashboard.home')}}" class="nav-link {{  request()->routeIs('dashboard.home') ? 'active' : '' }}">My Drive</a>
+                            
+                            <a class="nav-link {{  request()->routeIs('dashboard.recents') ? 'active' : '' }}" href="{{route('dashboard.recents')}}">Recent</a>
+
+                            <a class="nav-link {{  request()->routeIs('dashboard.trash') ? 'active' : '' }}" href="{{route('dashboard.trash')}}">Trash</a>
                           </nav>
                         </div>
+
                     </div>
 
                     @yield('content')

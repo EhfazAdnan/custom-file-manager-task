@@ -182,6 +182,48 @@ class FilesController extends Controller
 
     }
 
+    // file download
+
+    public function download_public($id){
+
+        $file = File::find($id);
+        $fileURL = $file->url;
+
+        if(\Storage::disk('local')->exists('public/'.$fileURL.'/'.$file->name)){
+            $path = \Storage::disk('local')->path('public/'.$fileURL.'/'.$file->name);
+
+            $content = file_get_contents($path);
+            return response($content)->withHeaders([
+               'Content-Type' => mime_content_type($path)
+            ]);
+        }
+        return redirect('/404');
+
+    }
+
+    // search
+
+    public function search(Request $request){
+
+       $this->validate($request,[
+            'search' => 'required',
+       ]);
+
+       $keyWord = $request->search;
+
+       // Get the currently authenticated user's ID...
+       $user_id = Auth::id();
+
+       // Get folder values
+       $fileFolders = File::where('userid',$user_id)->where('type','folder')->where('name', 'like', '%' . $keyWord .'%')->paginate(6);
+
+       // get files
+       $files = File::where('userid',$user_id)->where('type','files')->where('name', 'like', '%' . $keyWord .'%')->paginate(6);
+
+       return view('dashboard.search',compact('fileFolders','files'));
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -195,5 +237,14 @@ class FilesController extends Controller
 
         $folder->save();
         return redirect()->back()->with('status','Folder Removed Successfully !!');
+    }
+
+    public function destroyFiles($id)
+    {
+        $file = File::find($id);
+        $file->soft_delete = 1;
+
+        $file->save();
+        return redirect()->back()->with('status','File Removed Successfully !!');
     }
 }

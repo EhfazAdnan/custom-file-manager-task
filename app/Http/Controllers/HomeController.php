@@ -35,7 +35,7 @@ class HomeController extends Controller
         $fileFolders = File::where('userid',$user_id)->where('level',1)->where('soft_delete', 0)->paginate(6);
 
         // get files
-        $files = File::where('userid',$user_id)->where('parent_id',$user_id)->where('type','files')->paginate(6);
+        $files = File::where('userid',$user_id)->where('parent_id',$user_id)->where('type','files')->where('soft_delete', 0)->paginate(6);
 
         $findRoot = File::where('userid',$user_id)->where('parent_id',0)->first();
 

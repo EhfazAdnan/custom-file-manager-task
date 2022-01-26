@@ -3,11 +3,7 @@
 @section('content')
 
     <div class="col-md-8">
-        <h3><a href="{{route('dashboard.home')}}">Root</a> / {{$folderName->name}}</h3>   
-        
-        @if(session('status'))
-           <div class="alert alert-success">{{session('status')}}</div>
-        @endif
+        <h3><a href="{{route('dashboard.home')}}">Back</a></h3>   
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -146,50 +142,5 @@
         </div>
 
     </div>
-
-    <div class="col-md-2">
-
-        <div class="card">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            + New
-        </button>
-        </div>
-
-        <form action="{{route('files.create',['id'=>$findRoot->id])}}" method="post" enctype="multipart/form-data" class="mt-5">
-            @csrf
-            <input type="file" name="file[]" multiple="true" class="form-control">
-            <div class="card mt-1">
-               <button class="btn btn-sm btn-primary" type="submit">Upload</button>
-            </div>
-        </form>
-
-    </div>
-
-      <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Create New Folder User ID ({{$user_id}}) - Level ({{$findRoot->level}}) - id ({{$findRoot->id}})</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <form action="{{route('folder.create',['parent_id'=>$findRoot->parent_id,'serial'=>$findRoot->serial])}}" method="POST">
-                   @csrf
-                   <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="new folder" name="folder_name">
-                        <label for="floatingInput">New folder name ..</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create</button>
-                </div>
-                </form>
-
-            </div>
-            </div>
-        </div>
 
 @endsection
