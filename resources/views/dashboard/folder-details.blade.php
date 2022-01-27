@@ -50,10 +50,17 @@
                                 <form action="{{route('folder.update',['id'=>$fileFolder->id])}}" method="POST">
                                 @csrf
                                 <div class="modal-body">
+
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="floatingInput" placeholder="Edit folder" name="folder_name_edit" value="{{$fileFolder->name}}">
                                         <label for="floatingInput">Edit folder name ..</label>
                                     </div>
+
+                                    <select class="form-select" aria-label="Default select private" name="visibity">
+                                        <option selected value="0">Private</option>
+                                        <option value="1">Public</option>
+                                    </select>
+                                    
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

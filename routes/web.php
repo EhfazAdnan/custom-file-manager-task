@@ -19,14 +19,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// layout routes
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard.home');
 Route::get('/recents', [App\Http\Controllers\HomeController::class, 'recents'])->name('dashboard.recents');
 Route::get('/trash', [App\Http\Controllers\HomeController::class, 'trash'])->name('dashboard.trash');
 
+// folder create
 Route::post('create-folder/{parent_id}/{serial}', [App\Http\Controllers\FilesController::class,'store'])->name('folder.create');
 
+// file upload
 Route::post('upload-files/{id}', [App\Http\Controllers\FilesController::class,'storeFiles'])->name('files.create');
 
+// get folder details
 Route::get('folder/{id}',[App\Http\Controllers\FilesController::class,'index'])->name('folder-details');
 
 // update folder name
@@ -48,4 +52,5 @@ Route::get('/search-web', [App\Http\Controllers\FilesController::class, 'search'
 // admin routes
 Route::get('/admin/home', [App\Http\Controllers\SuperAdminController::class, 'index'])->name('admin.home')->middleware('is_admin');
 
+// configuration update
 Route::post('/admin/update-user/{id}', [App\Http\Controllers\SuperAdminController::class, 'update'])->name('user.update')->middleware('is_admin');

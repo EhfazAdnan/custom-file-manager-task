@@ -98,7 +98,8 @@ class FilesController extends Controller
     }
 
 
-    // ------------------------------------------------------
+    // store file part
+    
     public function storeFiles(Request $request, $id){
 
         $user_id = Auth::id();
@@ -186,7 +187,7 @@ class FilesController extends Controller
 
     }
 
-    // file download
+    // file download part
 
     public function download_public($id){
 
@@ -205,7 +206,7 @@ class FilesController extends Controller
 
     }
 
-    // search
+    // search part
 
     public function search(Request $request){
 
@@ -242,6 +243,8 @@ class FilesController extends Controller
         $folder->save();
         return redirect()->back()->with('status','Folder Removed Successfully !!');
     }
+
+    // destroy files
 
     public function destroyFiles($id)
     {

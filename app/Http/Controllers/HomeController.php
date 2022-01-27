@@ -42,6 +42,8 @@ class HomeController extends Controller
         return view('dashboard.home',compact('user_id','fileFolders','findRoot','files'));
     }
 
+
+    // recent page function
     public function recents()
     {
         $from = date('Y-m-d');
@@ -62,6 +64,8 @@ class HomeController extends Controller
         return view('dashboard.recents', compact('user_id','fileFolders','files'));
     }
 
+
+    // trash page function
     public function trash()
     {
         // Get the currently authenticated user...
